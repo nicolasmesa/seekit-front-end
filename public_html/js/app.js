@@ -111,7 +111,8 @@ $(document).ready(function() {
     function onDescriptionButtonClick() {
         var view = foundDescription,
                 msg = 'found',
-                inputs = $('.x-description-view input');
+                inputs = $('.x-description-view input'),
+                body = $(document.body);
 
         if (mainObj.action == 'lost') {
             view = lostDescription;
@@ -134,6 +135,7 @@ $(document).ready(function() {
             }
         });
 
+        body.addClass('x-loading');
         $.ajax({
             url: 'http://seekit-2k3mkmuvg3.elasticbeanstalk.com/ThingSrv',
             type: "POST",
@@ -142,10 +144,12 @@ $(document).ready(function() {
             contentType: "application/json",
             success: function() {
                 console.log('success', arguments);
+                body.removeClass('x-loading');
                 next(view);
             },
             error: function() {
                 console.log('error', arguments);
+                body.removeClass('x-loading');
                 alert('Oops!. An error ocurred. Please try again later');
             }
         });

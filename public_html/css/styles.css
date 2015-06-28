@@ -269,6 +269,10 @@ div.x-input-holder input, div.x-input-holder input:focus{
     background-image: url(../img/calendar.png);
 }
 
+.x-preinput.x-question{
+    background-image: url(../img/questionmark2.png);
+}
+
 .x-preinput.x-location{
     background-image: url(../img/location.png);
 }
@@ -357,4 +361,30 @@ li.phone-settings{
     color: #3B81E0;
     text-decoration: underline;
     font-size: 17px;
+}
+
+.x-loading .x-loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.8);
+    display: table;
+}
+
+.x-loader {
+    display: none;
+}
+
+.x-loader .x-loader-inner{    
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.x-loading-msg{
+    width: 300px;
+    margin: 0 auto;
+    font-size: 32px;
 }
