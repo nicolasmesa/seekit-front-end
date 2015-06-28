@@ -35,18 +35,35 @@
                     Please tell us your email address so you can get notifications.
                 </div>
 
-                <div class="x-tip x-when-where-view x-slider">
+                <!-- Loser specific -->
+                <div class="x-tip x-when-where-view x-slider x-loser">
                     We are sorry to hear that, please tell us more about what 
                     you have lost.
-                </div>
+                </div>                
 
-                <div class="x-tip x-lost-description-view x-slider">
+                <div class="x-tip x-description-view x-slider x-loser">
                     Please add description tags for your lost item
                 </div>
 
-                <div class="x-tip x-lost-success-view x-slider">
+                <div class="x-tip x-success-view x-slider x-loser">
                     Thank you for submitting. We will send you an email as soon as
                     we find a match for your description
+                </div>
+                
+                <div class="x-tip x-success-view x-slider x-finder">
+                    Thank you for submitting. We will send you an email if it 
+                    matches another request.
+                </div>
+
+
+                <!-- finder specific -->                
+                <div class="x-tip x-when-where-view x-slider x-finder">
+                    Thank you for your findings. We'd appreciate if you could
+                    give us some more detailed information.
+                </div>
+
+                <div class="x-tip x-description-view x-slider x-finder">
+                    Please provide some details about the object the you found
                 </div>
             </div>
             <div class="x-content">
@@ -90,7 +107,7 @@
                 <!-- End Email -->
 
                 <!-- When where view -->
-                <div class="x-slider x-form-view x-when-where-view">
+                <div class="x-slider x-form-view x-when-where-view x-loser x-finder">
                     <form id="when-where-form">
                         <ul>
                             <li>
@@ -114,10 +131,10 @@
                     </form>
                 </div>
                 <!-- When where view ends -->
-                
+
                 <!-- Lost description -->
-                <div class="x-slider x-form-view x-lost-description-view">
-                    <form id="lost-description">
+                <div class="x-slider x-form-view x-description-view x-loser x-finder">
+                    <form id="description">
                         <ul>
                             <li>
                                 <div class="x-input-holder">
@@ -128,19 +145,25 @@
                             <li class="phone-settings">
                                 <div class="x-input-holder">
                                     <div class="x-preinput x-brand"></div>
-                                    <input type="text" name="brand" placeholder="Brand" required="required" id="brand"/>
+                                    <input type="text" name="brand" placeholder="Brand" required="required"/>
                                 </div>
                             </li>                            
                             <li class="phone-settings">
                                 <div class="x-input-holder">
                                     <div class="x-preinput x-color"></div>
-                                    <input type="text" name="color" placeholder="Color" required="required" id="color"/>
+                                    <input type="text" name="color" placeholder="Color" required="required"/>
                                 </div>
                             </li>                            
                             <li class="phone-settings">
                                 <div class="x-input-holder">
                                     <div class="x-preinput x-case"></div>
-                                    <input type="text" name="case" placeholder="Case" required="required" id="case"/>
+                                    <input type="text" name="case" placeholder="Does it have a case?" required="required"/>
+                                </div>
+                            </li>  
+                            <li class="phone-settings">
+                                <div class="x-input-holder">
+                                    <div class="x-preinput x-case"></div>
+                                    <input type="text" name="passwordProtected" placeholder="Is it password protected?" required="required"/>
                                 </div>
                             </li>  
                             <li id="lost-adder">
@@ -149,7 +172,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="x-next-button x-lost-description-button">
+                                <a class="x-next-button x-description-button">
                                     Submit
                                 </a>
                             </li>                     
@@ -157,9 +180,9 @@
                     </form>
                 </div>
                 <!-- Lost description ends -->
-                
+
                 <!-- Lost success -->
-                <div class="x-slider x-lost-success-view">
+                <div class="x-slider x-success-view x-finder x-loser">
                     <div class="x-success-holder">
                         <div class="x-success">
                             <i class="x-icon-success"></i>
@@ -172,11 +195,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Lost success ends -->
-            
-            
-            
+                <!-- Lost success ends -->
+            </div>            
+
             <div class="x-main-footer">
                 <div class="x-footer-left">
                     <div class="x-message">

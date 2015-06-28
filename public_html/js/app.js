@@ -1,17 +1,21 @@
 $(document).ready(function() {
     var homeViews = $('.x-slider.x-home-view'),
             emailViews = $('.x-slider.x-email-view'),
-            whenWhereView = $('.x-when-where-view'),
-            lostDescription = $('.x-lost-description-view'),
+            loserWhenWhereView = $('.x-when-where-view.x-loser'),
+            lostDescription = $('.x-description-view.x-loser'),
             lostHolder = $('.x-lost-holder'),
-            lostSuccess = $('.x-lost-success-view'),
+            lostSuccess = $('.x-success-view.x-loser'),
+            foundHolder = $('.x-found-holder'),
+            finderWhenWhereView = $('.x-when-where-view.x-finder'),
+            foundDescription = $('.x-description-view.x-finder'),
+            findSuccess = $('.x-success-view.x-finder'),
             dateField = $('#date'),
             nameField = $('#name'),
             addLostButton = $('#add-lost-button'),
             lostAdderLi = $('#lost-adder'),
             emailButton = $('.x-email-button'),
             whenWhereButton = $('.x-when-where-button'),
-            lostDescriptionButton = $('.x-lost-description-button');
+            descriptionButton = $('.x-description-button');
 
 
     dateField.datepicker();
@@ -22,18 +26,26 @@ $(document).ready(function() {
     emailButton.click(onEmailButtonClick);
     whenWhereButton.click(onWhenWhereButtonClick);
     addLostButton.click(onAddLostButtonClick);
-    lostDescriptionButton.click(onLostDescriptionButtonClick);
+    descriptionButton.click(onLostDescriptionButtonClick);
+
+    foundHolder.click(onFoundHolderClick);
 
     var mainObj = {
         action: '',
         lost: [
             homeViews,
             emailViews,
-            whenWhereView,
+            loserWhenWhereView,
             lostDescription,
             lostSuccess
         ],
-        found: [],
+        found: [
+            homeViews,
+            emailViews,
+            finderWhenWhereView,
+            foundDescription,
+            findSuccess
+        ],
         history: [],
         nameCounter: 1
     };
@@ -42,6 +54,12 @@ $(document).ready(function() {
 
     function onLostHolderClick() {
         mainObj.action = 'lost';
+
+        next(homeViews);
+    }
+
+    function onFoundHolderClick() {
+        mainObj.action = 'found';
 
         next(homeViews);
     }
@@ -70,11 +88,19 @@ $(document).ready(function() {
             alert('Please add a location');
         }
 
-        next(whenWhereView);
+        if (mainObj.action == 'lost') {
+            next(loserWhenWhereView);
+        } else {
+            next(finderWhenWhereView);
+        }
     }
-    
-    function onLostDescriptionButtonClick(){
-        next(lostDescription);
+
+    function onLostDescriptionButtonClick() {
+        if (mainObj.action == 'lost') {
+            next(lostDescription);
+        } else {
+            next(foundDescription);
+        }
     }
 
     function next(el) {
@@ -97,7 +123,7 @@ $(document).ready(function() {
 
     function onNameFieldChange() {
         setTimeout(function() {
-            if (nameField.val() && /iphone/.test(nameField.val().toLowerCase())) {
+            if (nameField.val() && /phone/.test(nameField.val().toLowerCase())) {
                 displayPhoneSettings();
             } else {
                 hidePhoneSettings();
@@ -114,17 +140,17 @@ $(document).ready(function() {
     function hidePhoneSettings() {
         $('.phone-settings').hide();
     }
-    
-    function onAddLostButtonClick(){
+
+    function onAddLostButtonClick() {
         var elHtml = [
             '<li>',
             '<div class="x-input-holder">',
             '<div class="x-preinput x-case"></div>',
-            '<input class="x-lost-feature" type="text" name="lost-feature-' + mainObj.nameCounter + '" placeholder="Description"/>',
+            '<input class="x-lost-feature" type="text" name="lost-feature-' + mainObj.nameCounter + '" placeholder="Provide description tag"/>',
             '</div>',
             '</li> '
         ].join('');
-        
+
         $(elHtml).insertBefore(lostAdderLi);
     }
 });
