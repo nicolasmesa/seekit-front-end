@@ -273,6 +273,11 @@ div.x-input-holder input, div.x-input-holder input:focus{
     background-image: url(../img/location.png);
 }
 
+.x-preinput.x-user{
+    background-image: url(../img/user.png);
+}
+
+
 div.x-form-view{
     text-align: center;
     margin-top: 55px;

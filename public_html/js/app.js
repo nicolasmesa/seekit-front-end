@@ -26,7 +26,7 @@ $(document).ready(function() {
     emailButton.click(onEmailButtonClick);
     whenWhereButton.click(onWhenWhereButtonClick);
     addLostButton.click(onAddLostButtonClick);
-    descriptionButton.click(onLostDescriptionButtonClick);
+    descriptionButton.click(onDescriptionButtonClick);
 
     foundHolder.click(onFoundHolderClick);
 
@@ -47,33 +47,43 @@ $(document).ready(function() {
             findSuccess
         ],
         history: [],
-        nameCounter: 1
+        nameCounter: 1,
+        reqParams: {}
     };
 
 
 
     function onLostHolderClick() {
         mainObj.action = 'lost';
-
+        mainObj.reqParams.type = 'lost';
         next(homeViews);
     }
 
     function onFoundHolderClick() {
         mainObj.action = 'found';
-
-        next(homeViews);
+        mainObj.reqParams.type = 'found';
+        next(homeViews);        
     }
 
     function onEmailButtonClick() {
         var emailField = $('#email'),
+                userField = $('#user'),
                 regex = /^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]+/;
 
         if (!regex.test(emailField.val())) {
             alert('Please provide a correct email address');
             return;
         }
+        
+        if(!userField.val()){
+            alert('Please provide your name');
+            return;
+        }
 
-        next(emailViews);
+        mainObj.reqParams.email = emailField.val();
+        mainObj.reqParams.user = userField.val();
+
+        next(emailViews);       
     }
 
     function onWhenWhereButtonClick() {
@@ -88,6 +98,9 @@ $(document).ready(function() {
             alert('Please add a location');
         }
 
+        mainObj.reqParams.time = dateField.val();
+        mainObj.reqParams.location = locationField.val();
+
         if (mainObj.action == 'lost') {
             next(loserWhenWhereView);
         } else {
@@ -95,12 +108,47 @@ $(document).ready(function() {
         }
     }
 
-    function onLostDescriptionButtonClick() {
+    function onDescriptionButtonClick() {
+        var view = foundDescription,
+                msg = 'found',
+                inputs = $('.x-description-view input');
+
         if (mainObj.action == 'lost') {
-            next(lostDescription);
-        } else {
-            next(foundDescription);
+            view = lostDescription;
+            msg = 'lost';
         }
+
+        if (!nameField.val()) {
+            alert('Please provide the name of what you ' + msg);
+        }
+
+
+        mainObj.reqParams.name = nameField.val();
+        mainObj.reqParams.features = [];
+
+        inputs.each(function(index, input) {
+            var jqInput = $(input);
+
+            if (jqInput.attr('id') != 'name' && jqInput.val()) {
+                mainObj.reqParams.features.push(jqInput.val());
+            }
+        });
+
+        $.ajax({
+            url: 'http://seekit-2k3mkmuvg3.elasticbeanstalk.com/ThingSrv',
+            type: "POST",
+            data: JSON.stringify(mainObj.reqParams),
+            dataType: "json",
+            contentType: "application/json",
+            success: function() {
+                console.log('success', arguments);
+                next(view);
+            },
+            error: function() {
+                console.log('error', arguments);
+                alert('Oops!. An error ocurred. Please try again later');
+            }
+        });
     }
 
     function next(el) {
@@ -120,6 +168,7 @@ $(document).ready(function() {
             });
         }
     }
+
 
     function onNameFieldChange() {
         setTimeout(function() {

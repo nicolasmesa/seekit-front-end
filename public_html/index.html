@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Seekit | Find whatever you lost</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
@@ -92,6 +92,12 @@
                         <ul>                            
                             <li>
                                 <div class="x-input-holder">
+                                    <div class="x-preinput x-user"></div>
+                                    <input type="text" name="user" placeholder="Your name" required="required" id="user"/>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="x-input-holder">
                                     <div class="x-preinput x-email"></div>
                                     <input type="email" name="email" placeholder="Email" required="required" id="email"/>
                                 </div>
@@ -153,19 +159,7 @@
                                     <div class="x-preinput x-color"></div>
                                     <input type="text" name="color" placeholder="Color" required="required"/>
                                 </div>
-                            </li>                            
-                            <li class="phone-settings">
-                                <div class="x-input-holder">
-                                    <div class="x-preinput x-case"></div>
-                                    <input type="text" name="case" placeholder="Does it have a case?" required="required"/>
-                                </div>
-                            </li>  
-                            <li class="phone-settings">
-                                <div class="x-input-holder">
-                                    <div class="x-preinput x-case"></div>
-                                    <input type="text" name="passwordProtected" placeholder="Is it password protected?" required="required"/>
-                                </div>
-                            </li>  
+                            </li> 
                             <li id="lost-adder">
                                 <div class="x-add-tag-holder">
                                     <div id="add-lost-button" class="x-add-tag-button">+</div>
